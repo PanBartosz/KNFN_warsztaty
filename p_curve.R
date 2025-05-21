@@ -8,8 +8,10 @@ library(metafor)  # escalc()
 library(dplyr)    # %>% i filtrowanie
 
 # Funkcja symulująca jedno “badanie”
-hack_the_study_curve <- function(n0 = 40, max_extra = 40, trim_sd = 2) {
-  # Helper: policz g i vi dla dwóch prób
+hack_the_study_curve <- function(n0 = 40,
+                                 max_extra = 40,
+                                 trim_sd = 2) {
+  # Helper: policz wielkość efektu i jego wariancje
   calc_es <- function(a, b) {
     escalc(measure = "SMD",
            m1i = mean(a), sd1i = sd(a), n1i = length(a),
@@ -23,7 +25,7 @@ hack_the_study_curve <- function(n0 = 40, max_extra = 40, trim_sd = 2) {
   if (p < .05)
     return(c(p = p, yi = es$yi, vi = es$vi))
   
-  ## 1) Trimming outlierów i ponowny t
+  ## 1) Trimming outlierów 
   x_trim <- x[abs(scale(x)) < trim_sd]
   y_trim <- y[abs(scale(y)) < trim_sd]
   if (length(x_trim) > 5 && length(y_trim) > 5) {

@@ -4,8 +4,8 @@
 
 # Liczba sukcesów: 12 
 # Liczba prób: 16
-# Hipoteza zerowa: Bond zgaduje na chybił-trafił
-# Prawdopodobieństwo sukcesu, jeśli zgaduje na chybił-trafił: 50%
+# Hipoteza zerowa: Bond zgaduje na chybił-trafił (50-50)
+# Prawdopodobieństwo sukcesu, jeśli zgaduje na chybił-trafił: 0.5
 # Rozkład prawdopodobieństwa dla liczby sukcesów, jeśli "strzela":
 
 barplot(dbinom(0:16, 16, 0.5), names.arg = 0:16)

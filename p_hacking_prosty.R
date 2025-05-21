@@ -1,10 +1,10 @@
 set.seed(2025)
 
 hack_the_p <- function(n0 = 40, # początkowy N na grupę
-                       max_extra = 40, # ile osób max można dobrać
+                       max_extra = 40, # ile osób max można dobrać w ramach "peekingu"
                        trim_sd = 2) { # próg przycinania outlierów
   
-  # Generujemy brak efektu
+  # Generujemy brak efektu (obie próby losujemy z tego samego rozkładu)
   x <- rnorm(n0)
   y <- rnorm(n0)
   
@@ -23,7 +23,7 @@ hack_the_p <- function(n0 = 40, # początkowy N na grupę
   p_trim <- t.test(x_trim, y_trim, var.equal = TRUE)$p.value
   if (p_trim < .05) return(p_trim)
   
-  # 3) Test nieparametryczny (Wilcoxon), licząć, że on "lepiej wyjdzie"
+  # 3) Test nieparametryczny (Wilcoxon), licząc, że on "lepiej wyjdzie"
   p_rank <- wilcox.test(x, y)$p.value
   if (p_rank < .05) return(p_rank)
   
